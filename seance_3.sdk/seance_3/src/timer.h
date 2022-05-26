@@ -1,0 +1,27 @@
+/*
+ *  TP 2 : SOC / FPGA
+ *  Jeremy VICENTE & Baptiste FRITOT
+ *  timer.h
+ *
+ */
+
+#include <stdio.h>
+#include "platform.h"
+#include "xil_printf.h"
+
+#include "xstatus.h"
+#include "xgpio.h"
+#include "xtmrctr.h"
+#include "xil_exception.h"
+
+/** Variable **/
+#define TIMER_NUMBER 0
+#define TIMER_COUNT		  			 XPAR_TMRCTR_0_DEVICE_ID
+
+/** Instance **/
+XTmrCtr TimerInst;   /* The instance of the Timer Counter */
+
+/** Prototype **/
+int init_timer(void);
+int stop_timer(void);
+u32 cycle_timer(void);

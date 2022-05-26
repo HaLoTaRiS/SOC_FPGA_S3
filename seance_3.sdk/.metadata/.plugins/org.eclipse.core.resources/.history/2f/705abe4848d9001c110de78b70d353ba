@@ -1,0 +1,71 @@
+/*
+ *  TP 2 : SOC / FPGA
+ *  Jeremy VICENTE & Baptiste FRITOT
+ *  tp_seance_3.c
+ *
+ *  T6 : Mesurer le temps "Tics_par_seconde" & temps de bienvenue
+ *  T7 : Mesurer le temps dans le PS pour 10 entier en soft
+ *
+ */
+
+#include <stdio.h>
+#include "platform.h"
+#include "xil_printf.h"
+
+
+#include "xparameters.h"
+#include "xgpio.h"
+#include "xtmrctr.h"
+
+XGpio LED_t;			// Instance Led
+XTmrCtr Timer_t;		// Instance timer
+
+
+// Fonction pour initialiser le timer
+
+
+int Status;  // variable locale pour nos tests
+
+// Fonction d'initialisation du Timer
+int init_timer(void)
+{
+	// On initialise l’instance pour du timer (adresse du périphérique)
+	Status = XTmrCtr_Initialize(&TimerInst, XPAR_TMRCTR_0_DEVICE_ID);
+	if (Status != XST_SUCCESS) { return XST_FAILURE;}
+
+	// Définir la fonction appelé par le timer
+	XTmrCtr_SetHandler(&TimerInst, Timer_ISR, &TimerInst);
+
+	// Définir les options du timer
+	XTmrCtr_SetOptions(&TimerInst,  DEBUT_COMPTEUR,  XTC_INT_MODE_OPTION  |
+			XTC_AUTO_RELOAD_OPTION | XTC_DOWN_COUNT_OPTION);
+
+	// pour définir les valeurs du compteur
+	XTmrCtr_SetResetValue(&TimerInst, DEBUT_COMPTEUR, FIN_COMPTEUR);
+
+	// pour démarrer le timer
+	XTmrCtr_Start(&TimerInst, DEBUT_COMPTEUR);
+
+	return XST_SUCCESS;
+}
+
+// Fonction interruption
+// fonction appelé par le timer toutes les 0,125 secondes
+void Timer_ISR (void *CallBackRef, u8 TmrCtrNumber)
+{
+    animer_message();
+}
+
+int main()
+{
+	init_platform();
+
+	/*********** CODE TP 2 *****************/
+	xil_printf ("=================================\r\n");
+	xil_printf ("      Seance 3 - Accu_IP - Timer\r\n");
+	xil_printf ("Baptiste FRITOT - Jeremy VICENTE\r\n");
+	xil_printf ("=================================\r\n\r\n");
+
+	cleanup_platform();
+	return 0;
+}

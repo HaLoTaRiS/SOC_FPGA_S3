@@ -1,0 +1,59 @@
+/*
+ *  TP 2 : SOC / FPGA
+ *  Jeremy VICENTE & Baptiste FRITOT
+ *  timer.c
+ *
+ */
+
+#include <stdio.h>
+#include "platform.h"
+#include "xil_printf.h"
+#include "timer.h"
+#include "xstatus.h"
+#include "xtmrctr.h"
+
+
+
+XTmrCtr TimerInst;   /* The instance of the Timer Counter */
+
+
+// Fonction d'initialisation du Timer
+int init_timer(void)
+{
+	int Status;
+
+	Status = XTmrCtr_Initialize(&TimerInst, TIMER_COUNT);
+	if (Status != XST_SUCCESS) { return XST_FAILURE;}
+
+	/* Interruption */
+	// pas besoin car on utilise pas de fonction d'interruption
+	//	XTmrCtr_SetHandler(&TimerInst, Timer_ISR_Handler, &TimerInst);
+
+	/* Option du timer : mode compteur */
+	// Pas besoin car on utilise pas l'autoreload
+	// le compteur est en mode compteur
+	// on utilise pas d'interruption
+	//	XTmrCtr_SetOptions(&TimerInst, TIMER_NUMBER,	XTC_DOWN_COUNT_OPTION);
+
+	/* On utilise le compteur à 0 */
+	XTmrCtr_SetResetValue(&TimerInst, TIMER_NUMBER, 0);
+
+	/* Start le timer */
+	XTmrCtr_Start(&TimerInst, TIMER_NUMBER);
+
+	return XST_SUCCESS;
+}
+
+// Fonction qui arrete le timer
+int stop_timer(void){
+	XTmrCtr_Stop(&TimerInst, TIMER_NUMBER);
+	return XST_SUCCESS;
+}
+
+// Fonction qui calcul le timer
+// Nota : valeur max du compteur : 4294967295 => valeur 0xFFFFFFFF
+u32 cycle_timer(void){
+	u32 TIMER_COMPTEUR_VALUE = 0;
+	TIMER_COMPTEUR_VALUE = XTmrCtr_GetValue(&TimerInst, TIMER_NUMBER);
+	return TIMER_COMPTEUR_VALUE;
+}

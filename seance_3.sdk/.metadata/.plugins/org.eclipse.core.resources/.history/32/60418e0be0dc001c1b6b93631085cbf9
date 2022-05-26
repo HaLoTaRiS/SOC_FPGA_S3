@@ -1,0 +1,31 @@
+#include <stdio.h>
+#include "platform.h"
+#include "xil_printf.h"
+
+#include "xstatus.h"
+#include "xgpio.h"
+#include "xtmrctr.h"
+//#include "xintc.h"
+#include "xil_exception.h"
+#include "sleep.h"
+
+//#include "microblaze_sleep.h"
+//#include <xil_io.h>							// Contains Xil_Out8 and its variations
+
+/*======================================================================== */
+//#define RESET_VALUE	(100000000) // delai 1sec
+#define TIMER_CNTR 0				// valeur initiale ?
+
+#define TIMER_COUNT		   XPAR_TMRCTR_0_DEVICE_ID
+
+
+//int RESET_VALUE 100000000 ;
+
+
+
+XTmrCtr TimerInst;   /* The instance of the Timer Counter */
+
+int init_timer(void);
+int init_interrupts(void);
+void Timer_ISR_Handler(void *CallBackRef, u8 TmrCtrNumber);
+/*================================================================*/

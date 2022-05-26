@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Vivado v2019.1 (64-bit)
+# SW Build 2552052 on Fri May 24 14:49:42 MDT 2019
+# IP Build 2548770 on Fri May 24 18:01:18 MDT 2019
+# Start of session at: Wed May 25 23:42:42 2022
+# Process ID: 18608
+# Current directory: C:/Users/Baptiste/Documents/ENSEA/3D/S10_007_Soc/003_TP2/Zybo-soc-dossier5/seance_3/seance_3.runs/synth_1
+# Command line: vivado.exe -log zybo_7_wrapper.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source zybo_7_wrapper.tcl
+# Log file: C:/Users/Baptiste/Documents/ENSEA/3D/S10_007_Soc/003_TP2/Zybo-soc-dossier5/seance_3/seance_3.runs/synth_1/zybo_7_wrapper.vds
+# Journal file: C:/Users/Baptiste/Documents/ENSEA/3D/S10_007_Soc/003_TP2/Zybo-soc-dossier5/seance_3/seance_3.runs/synth_1\vivado.jou
+#-----------------------------------------------------------
+source zybo_7_wrapper.tcl -notrace

@@ -1,0 +1,28 @@
+/*
+ *  TP 2 : SOC / FPGA
+ *  Jeremy VICENTE & Baptiste FRITOT
+ *  tp_seance_3.c
+ *
+ *  T6 : Mesurer le temps "Tics_par_seconde" & temps de bienvenue
+ *  T7 : Mesurer le temps dans le PS pour 10 entier en soft
+ *
+ */
+
+#include <stdio.h>
+#include "platform.h"
+#include "xil_printf.h"
+
+
+int main()
+{
+    init_platform();
+
+	/*********** CODE TP 2 *****************/
+	xil_printf ("=================================\r\n");
+	xil_printf ("      Seance 3 - Accu_IP - Timer\r\n");
+	xil_printf ("Baptiste FRITOT - Jeremy VICENTE\r\n");
+	xil_printf ("=================================\r\n\r\n");
+
+    cleanup_platform();
+    return 0;
+}

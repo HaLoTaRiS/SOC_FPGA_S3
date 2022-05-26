@@ -1,0 +1,59 @@
+
+
+#include <stdio.h>
+#include "platform.h"
+#include "xil_printf.h"
+
+#include "xstatus.h"
+#include "xgpio.h"
+#include "xtmrctr.h"
+
+#include "xil_exception.h"
+
+#include <xil_io.h>							// Contains Xil_Out8 and its variations
+#include "timer.h"
+
+
+XTmrCtr TimerInst;   /* The instance of the Timer Counter */
+
+/*======================================================================== */
+
+
+// Fonction d'initialisation du Timer
+int init_timer(void)
+{
+	int Status;
+
+	Status = XTmrCtr_Initialize(&TimerInst, TIMER_COUNT);
+	if (Status != XST_SUCCESS) { return XST_FAILURE;}
+
+	/* Interruption */
+//	XTmrCtr_SetHandler(&TimerInst, Timer_ISR_Handler, &TimerInst);
+
+	/* Option du timer : mode compteur */
+	XTmrCtr_SetOptions(&TimerInst, TIMER_NUMBER,	XTC_DOWN_COUNT_OPTION);
+
+
+	//XTC_DOWN_COUNT_OPTION
+	//XTC_INT_MODE_OPTION
+
+	/* Reset le timer une fois expire */
+
+//	XTmrCtr_SetResetValue(&TimerInst, TIMER_CNTR, RESET_VALUE);
+
+	/* Start le timer */
+	XTmrCtr_Start(&TimerInst, TIMER_NUMBER);
+
+	return XST_SUCCESS;
+}
+
+int stop_timer(void){
+	XTmrCtr_Stop(&TimerInst, TIMER_NUMBER);
+	return XST_SUCCESS;
+}
+
+u32 cycle_timer(void){
+	u32 TIMER_COMPTEUR_VALUE = 0;
+//	TIMER_COMPTEUR_VALUE = XTmrCtr_GetValue(&TimerInst, TIMER_NUMBER);
+	return TIMER_COMPTEUR_VALUE;
+}

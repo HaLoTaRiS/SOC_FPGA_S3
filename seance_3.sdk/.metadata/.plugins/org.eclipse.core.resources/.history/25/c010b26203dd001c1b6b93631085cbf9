@@ -1,0 +1,97 @@
+/*
+ *  TP 2 : SOC / FPGA
+ *  Jeremy VICENTE & Baptiste FRITOT
+ *  tp_seance_3.c
+ *
+ *  T6 : Mesurer le temps "Tics_par_seconde" & temps de bienvenue
+ *  T7 : Mesurer le temps dans le PS pour 10 entier en soft
+ *
+ */
+
+#include <stdio.h>
+#include <stdbool.h>
+
+#include "platform.h"
+#include "xil_printf.h"
+
+
+#include "xparameters.h"
+#include "xgpio.h"
+#include "xil_exception.h"
+
+
+XGpio LEDInst;			// Instance Led
+
+bool active_GetTime = false; // Flag
+
+// Fonction pour initialiser le timer
+
+
+int Status;  // variable locale pour nos tests
+
+#define TICS_PAR_SECONDE 1; // a completer plus tard
+
+// la fréquence est à 200 Mhz
+u32 calcul_ns (u32 nbr_cycle){
+	return nbr_cycle = nbr_cycle*5;
+}
+
+u32 calcul_us (u32 nbr_cycle){
+	return nbr_cycle = nbr_cycle*5/1000;
+}
+
+void GetTime(void){
+	u32 timer_cycle = 0;
+
+	// Lancement du compteur
+	if (active_GetTime == false){
+		active_GetTime = true;
+		init_timer();
+	}
+
+	// fin du compteur & récupère la valeur
+	else {
+		timer_cycle = cycle_timer();
+		stop_timer();
+		xil_printf("Count timer : %u\r\n",timer_cycle);
+		xil_printf("Temps : %u ns | %u us \r\n",calcul_ns(timer_cycle),calcul_us(timer_cycle));
+		active_GetTime = false;
+	}
+}
+
+
+
+
+
+
+int main()
+{
+	init_platform();
+
+	// comptage du message de bienvenue
+	GetTime(); // début comptage
+	/*********** CODE TP 2 *****************/
+	xil_printf ("=================================\r\n");
+	xil_printf ("      Seance 3 - Accu_IP - Timer\r\n");
+	xil_printf ("Baptiste FRITOT - Jeremy VICENTE\r\n");
+	xil_printf ("=================================\r\n\r\n");
+	GetTime(); // fin du comptage
+
+
+	sleep (2);
+
+	// comptage du calcul
+	int count_T7 = 0;
+	GetTime(); // début comptage
+	for (int i = 0; i<10; i++) {
+		count_T7 ++;
+	}
+	GetTime(); // fin du comptage
+
+	while(1){
+
+	}
+
+	cleanup_platform();
+	return 0;
+}

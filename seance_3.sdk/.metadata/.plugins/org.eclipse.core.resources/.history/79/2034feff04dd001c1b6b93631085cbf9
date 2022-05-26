@@ -1,0 +1,33 @@
+/*
+ *  TP 2 : SOC / FPGA
+ *  Jeremy VICENTE & Baptiste FRITOT
+ *  timer.h
+ *
+ */
+
+#include <stdio.h>
+#include "platform.h"
+#include "xil_printf.h"
+
+#include "xstatus.h"
+#include "xgpio.h"
+#include "xtmrctr.h"
+#include "xil_exception.h"
+
+/** Variable **/
+#define TIMER_MAX_VALUE	0xFFFFFFFF // delai max du timer 1sec
+#define TIMER_NUMBER 0				// valeur initiale ?
+
+#define TIMER_COUNT		   XPAR_TMRCTR_0_DEVICE_ID
+
+
+//int RESET_VALUE 100000000 ;
+
+
+
+XTmrCtr TimerInst;   /* The instance of the Timer Counter */
+
+int init_timer(void);
+
+
+/*================================================================*/
