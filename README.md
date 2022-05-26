@@ -1,6 +1,6 @@
 # SOC_FPGA_S3
 ==
-       TP SOC FPGA SEANCE 2
+       TP SOC FPGA SEANCE 3
 ==
 Auteur : 
    - Baptiste FRITOT
